@@ -1,5 +1,5 @@
 public class Product {
-    private String name;
+    private final String name;
     private Double price;
 
     public Product(String name, Double price) {
@@ -17,9 +17,9 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "name='" + name + '\'' +
-                ", price=" + price +
+        return "{[Product] " +
+                "[Name = " + name + "]" +
+                " [Price = " + price +"€]"+
                 '}';
     }
 }

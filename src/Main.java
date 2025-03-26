@@ -1,38 +1,33 @@
-import java.sql.SQLOutput;
-import java.util.ArrayList;
-
 public class Main {
     public static void main(String[] args) {
-        Sale cart = new Sale();
-        try {
-            double total = cart.CalculateTotalPrice();
-            System.out.println("The total price of your cart is " + total + "€");
-        } catch (EmptyShoppingCartException e) {
-            System.out.println("ERROR: " + e.getMessage());
+        Sale cart1 = new Sale();
+        ExceptionTester test1 = new ExceptionTester(cart1);
 
-        }
+        System.out.println("Testing IndexOutOfBoundsExceptions with empty cart (always forced)");
+        test1.forceIndexOutOfBoundsExceptions();
+        System.out.println("\n");
+
+        System.out.println("Testing EmptyCartException with empty cart");
+        test1.forceThrowsEmptyCartException();
+        System.out.println("\n");
 
         Product product1 = new Product("Iphone 15", 1200.0);
         Product product2 = new Product("Pencil", 0.50);
         Product product3 = new Product("TV Screen", 550.00);
 
+        System.out.println("Adding products to the cart and test again");
+        System.out.println("\n");
+        cart1.addProduct(product1);
+        cart1.addProduct(product2);
+        cart1.addProduct(product3);
 
-        cart.addProduct(product1);
-        cart.addProduct(product2);
-        cart.addProduct(product3);
 
-        try {
-            double total = cart.CalculateTotalPrice();
-            System.out.println("The total price of your cart is " + total + "€");
-        } catch (EmptyShoppingCartException e) {
-            System.out.println("ERROR: " + e.getMessage());
-        }
+        System.out.println("Testing IndexOutOfBoundsExceptions with 3 products in cart (always forced)");
+        test1.forceIndexOutOfBoundsExceptions();
+        System.out.println("\n");
 
-        try {
-            System.out.println(cart.getProducts(6).toString());
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+        System.out.println("Testing EmptyCartException with 3 products in cart");
+        test1.forceThrowsEmptyCartException();
 
 
     }
